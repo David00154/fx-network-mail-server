@@ -1,17 +1,20 @@
+require('dotenv').config()
 const express = require("express")
 const cors = require("cors")
 var nodemailer = require('nodemailer');
-
+// console.log(process.env.PASSWORD)
 const sendMail = (req, res) => {
   // console.log(req.query)
   const {to, subject, text} = req.query;
   var transporter = nodemailer.createTransport({
-  host: 'smtp.mailgun.org',
+  host: 'in-v3.mailjet.com',
   port: 465,
   secure: true,
   auth: {
-    user: 'info@fxnetwork.space',
-    pass: '6af20b623bb97605839db974af9719d3-2ac825a1-7aa5ec69'
+    user: process.env.USER,
+    pass: process.env.PASSWORD
+    // user: "427956bceadfbf0749d3899001de4a67",
+    // pass: "1e712194159062161cc5074034c9ef4c"
   }
 });
 
