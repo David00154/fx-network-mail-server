@@ -7,7 +7,7 @@ const sendMail = (req, res) => {
   // console.log(req.query)
   const {to, subject, html} = req.query;
   var transporter = nodemailer.createTransport({
-  host: 'in-v3.mailjet.com',
+  host: 'mail.fxnetwork.space',
   port: 465,
   secure: true,
   auth: {
@@ -19,7 +19,7 @@ const sendMail = (req, res) => {
 });
 
 var mailOptions = {
-  from: `"Admin@ Fx Network" <info@fxnetwork.space>`,
+  from: `"Admin@ Fx Network" <admin@fxnetwork.space>`,
   to,
   subject,
   html
