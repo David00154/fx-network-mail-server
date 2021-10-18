@@ -1,12 +1,13 @@
 require('dotenv').config()
 const express = require("express")
 const cors = require("cors")
+const bodyParser = require("body-parser")
 var nodemailer = require('nodemailer');
 // console.log(process.env.PASSWORD)
 const sendMail = (req, res) => {
-  // console.log(req.query)
-  const html = req.headers.html
-  const {to, subject} = req.query;
+  console.log(req.body)
+  // const html = req.body.html
+  const {to, subject, html} = req.body;
   var transporter = nodemailer.createTransport({
   host: 'mail.fxnetwork.space',
   port: 465,
@@ -41,8 +42,9 @@ transporter.sendMail(mailOptions, function(error, info){
 const app = express()
 
 app.use(cors())
-app.use(express.json())
-app.get('/send-mail', sendMail)
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.post('/send-mail', sendMail)
 
 app.listen(process.env.PORT || "500", () => console.log("Server started"))
 
