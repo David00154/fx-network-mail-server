@@ -5,7 +5,8 @@ var nodemailer = require('nodemailer');
 // console.log(process.env.PASSWORD)
 const sendMail = (req, res) => {
   // console.log(req.query)
-  const {to, subject, html} = req.query;
+  const html = req.headers.html
+  const {to, subject} = req.query;
   var transporter = nodemailer.createTransport({
   host: 'mail.fxnetwork.space',
   port: 465,
@@ -17,7 +18,6 @@ const sendMail = (req, res) => {
     // pass: "1e712194159062161cc5074034c9ef4c"
   }
 });
-
 var mailOptions = {
   from: `"Admin@ Fx Network" <admin@fxnetwork.space>`,
   to,
@@ -41,7 +41,7 @@ transporter.sendMail(mailOptions, function(error, info){
 const app = express()
 
 app.use(cors())
-
+app.use(express.json())
 app.get('/send-mail', sendMail)
 
 app.listen(process.env.PORT || "500", () => console.log("Server started"))
