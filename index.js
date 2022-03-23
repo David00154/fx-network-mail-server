@@ -11,7 +11,7 @@ const sendMail = (req, res) => {
   var transporter = nodemailer.createTransport({
   host: 'us2.smtp.mailhostbox.com',
 //   port: 465,
-    port: 25,
+    port: 587,
   secure: true,
   auth: {
     user: process.env.USER,
