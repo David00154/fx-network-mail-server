@@ -10,7 +10,8 @@ const sendMail = (req, res) => {
   const {to, subject, html} = req.body;
   var transporter = nodemailer.createTransport({
   host: 'smtp.fxnetwork.space',
-  port: 465,
+//   port: 465,
+    port: 587,
   secure: true,
   auth: {
     user: process.env.USER,
